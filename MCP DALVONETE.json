@@ -1,0 +1,319 @@
+{
+  "name": "MCP DALVONETE",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "mcpdalvnotes"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0c175e01-c00a-438f-8694-ced0e78a53fc",
+      "name": "MCP Server Trigger",
+      "webhookId": "843562d8-1843-4ca2-84ce-0ffeec19cf18"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "6c56deec10e7d9a65bb9c73a393a480934803a1f531035f438fdae05b0d7b68f@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "CHALÉ "
+        },
+        "returnAll": true,
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -64,
+        224
+      ],
+      "id": "6c9bcd48-5340-404d-abfe-69073c57805d",
+      "name": "busca_evento_calendario",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "esOs7tIK03gDk7Fu",
+          "name": "Google Calendar dalvonete"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Use this tool to register leads in CRM",
+        "workflowId": {
+          "__rl": true,
+          "value": "5d3jpJxl5JjFhGNg",
+          "mode": "list",
+          "cachedResultName": "cadastra CRM"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nome": "={{ $fromAI(\"nome\") }}",
+            "Ocasião do evento": "={{ $fromAI(\"ocasiao\",\"chalé ou evento. Ps: Escreva exatamente dessa forma.\") }}",
+            "telefone": "={{ $fromAI(\"telefone\",\"telefone ex: 553799351255 sempre coloque o DDI, DDD E NUMERO SEM .+ ou - apneas 553799351255\") }}",
+            "Data do evento": "={{ $fromAI(\"data_do_evento\",\"data do evento selecionado pelo lead siga o padrão a seguir para preencher a data: 2025-10-02 ou seja YYYY-MM-DD Ano, mes, dia. Sempre siga esse modelo\") }}",
+            "cidade": "={{ $fromAI(\"cidade\") }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "nome",
+              "displayName": "nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "Ocasião do evento",
+              "displayName": "Ocasião do evento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "telefone",
+              "displayName": "telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "Data do evento",
+              "displayName": "Data do evento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "cidade",
+              "displayName": "cidade",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        288,
+        224
+      ],
+      "id": "e6800005-9d56-493d-b737-e79878b01702",
+      "name": "cadastra_lead_CRM"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1tWZa2xifXSs-0-gK_1Jv87E1NJE3-ZfNcVjDokfYCSk",
+          "mode": "list",
+          "cachedResultName": "trava IA - Atendimento",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tWZa2xifXSs-0-gK_1Jv87E1NJE3-ZfNcVjDokfYCSk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tWZa2xifXSs-0-gK_1Jv87E1NJE3-ZfNcVjDokfYCSk/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telefone": "={{ $fromAI(\"telefone\",\"Telefone do lead ex: 553799351255\") }}",
+            "travar IA?": "Sim"
+          },
+          "matchingColumns": [
+            "telefone"
+          ],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "telefone",
+              "displayName": "telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "travar IA?",
+              "displayName": "travar IA?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Ultimo envio",
+              "displayName": "Ultimo envio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        464,
+        224
+      ],
+      "id": "158ac144-d775-4186-a6dd-a815093b09c4",
+      "name": "Trava_atendimento",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8p3dAKW3FP7ZgB0f",
+          "name": "Google Sheets dalvonete"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Use this tool to upload videos about the cabin when it's time for the stream.",
+        "workflowId": {
+          "__rl": true,
+          "value": "rArZX75ZbagVwfUv",
+          "mode": "list",
+          "cachedResultName": "envia_video"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telefone": "={{ $fromAI(\"telefone_lead\",\"telefone da pessoa ex:553799351255\") }}"
+          },
+          "matchingColumns": [
+            "telefone"
+          ],
+          "schema": [
+            {
+              "id": "telefone",
+              "displayName": "telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        96,
+        224
+      ],
+      "id": "bfde10a8-dff1-4369-9a75-7b326314c7b1",
+      "name": "envia_video"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "busca_evento_calendario": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cadastra_lead_CRM": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trava_atendimento": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "envia_video": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "73f6fdde-7c02-4b69-a389-f1af36162e05",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "98a7f76cbff973591af08e09b5be2fed14b55b37d878782c0638229a94477203"
+  },
+  "id": "FQwgv5YerA9j76Ha",
+  "tags": []
+}
